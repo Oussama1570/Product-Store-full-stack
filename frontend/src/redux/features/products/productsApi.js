@@ -20,7 +20,6 @@ const productsApi = createApi({
         fetchAllProducts: builder.query({
             query: () => "/",
             providesTags: ['Products'],
-            // Optional: Add error handling here if needed
         }),
         fetchProductById: builder.query({
             query: (id) => `/${id}`,
@@ -50,6 +49,16 @@ const productsApi = createApi({
             }),
             invalidatesTags: ['Products'],
         }),
+
+        // New mutation to update product price based on percentage
+        updateProductPrice: builder.mutation({
+            query: ({ id, percentage }) => ({
+                url: `/update-price/${id}`,
+                method: "PUT",
+                body: { percentage },
+            }),
+            invalidatesTags: ['Products'],
+        }),
     })
 });
 
@@ -58,7 +67,8 @@ export const {
     useFetchProductByIdQuery,
     useAddProductMutation,
     useUpdateProductMutation,
-    useDeleteProductMutation
+    useDeleteProductMutation,
+    useUpdateProductPriceMutation // New hook for updating price
 } = productsApi;
 
 export default productsApi;

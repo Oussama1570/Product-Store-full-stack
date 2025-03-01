@@ -41,6 +41,7 @@ router.post("/", async (req, res) => {
   }
 });
 
+// Define the route for updating an order
 router.patch("/:id", async (req, res) => {
   const { id } = req.params;
   const { isPaid, isDelivered } = req.body;  
@@ -68,22 +69,17 @@ router.patch("/:id", async (req, res) => {
   }
 });
 
-
-
-  // Delete an order
-  router.delete('/delete/:id', async (req, res) => {
-    try {
-      const order = await Order.findByIdAndDelete(req.params.id);
-      if (!order) {
-        return res.status(404).json({ message: 'Order not found' });
-      }
-      res.status(200).json({ message: 'Order deleted successfully' });
-    } catch (err) {
-      res.status(500).json({ message: 'Error deleting order', error: err.message });
+// Delete an order
+router.delete('/delete/:id', async (req, res) => {
+  try {
+    const order = await Order.findByIdAndDelete(req.params.id);
+    if (!order) {
+      return res.status(404).json({ message: 'Order not found' });
     }
-  });
-  
-  
-  
+    res.status(200).json({ message: 'Order deleted successfully' });
+  } catch (err) {
+    res.status(500).json({ message: 'Error deleting order', error: err.message });
+  }
+});
 
 module.exports = router;

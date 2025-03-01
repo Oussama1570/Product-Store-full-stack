@@ -188,12 +188,7 @@ const Dashboard = () => {
                   </ul>
                 </div>
               </div>
-              <div className="flex flex-col row-span-3 bg-white shadow rounded-lg">
-                <div className="px-6 py-5 font-semibold border-b border-gray-100">Students by type of studying</div>
-                <div className="p-4 flex-grow">
-                  <div className="flex items-center justify-center h-full px-4 py-24 text-gray-400 text-3xl font-semibold bg-gray-100 border-2 border-gray-200 border-dashed rounded-md">Chart</div>
-                </div>
-              </div>
+              
             </section>
             <section className="text-right font-semibold text-gray-500">
               <a href="#" className="text-purple-600 hover:underline">Recreated on Codepen</a> with <a href="https://tailwindcss.com/" className="text-teal-400 hover:underline">Tailwind CSS</a> by Azri Kahar, <a href="https://dribbble.com/shots/10711741-Free-UI-Kit-for-Figma-Online-Courses-Dashboard" className="text-purple-600 hover:underline">original design</a> made by Chili Labs

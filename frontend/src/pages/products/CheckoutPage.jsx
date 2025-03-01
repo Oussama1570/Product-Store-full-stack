@@ -32,20 +32,28 @@ const CheckoutPage = () => {
         };
 
         try {
-            await createOrder(newOrder).unwrap();
-            Swal.fire({
-                title: "Confirmed Order",
-                text: "Your order placed successfully!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Yes, It's Okay!"
-            });
-            navigate("/orders");
+            // Create order API request
+            const result = await createOrder(newOrder).unwrap();
+
+            if (result) {
+                Swal.fire({
+                    title: "Confirmed Order",
+                    text: "Your order was placed successfully!",
+                    icon: "success",
+                    confirmButtonColor: "#3085d6",
+                    confirmButtonText: "Go to Orders"
+                }).then(() => {
+                    navigate("/orders"); // Navigate to the orders page
+                });
+            }
         } catch (error) {
             console.error("Error placing an order", error);
-            alert("Failed to place an order");
+            Swal.fire({
+                title: "Error!",
+                text: error?.message || "Failed to place an order",
+                icon: "error",
+                confirmButtonColor: "#d33",
+            });
         }
     };
 
@@ -113,15 +121,6 @@ const CheckoutPage = () => {
                                                 <input
                                                     {...register("country", { required: true })}
                                                     name="country" id="country" placeholder="Country" className="px-4 appearance-none outline-none text-gray-800 w-full bg-transparent" />
-                                                <button tabIndex="-1" className="cursor-pointer outline-none focus:outline-none transition-all text-gray-300 hover:text-red-600">
-                                                    <svg className="w-4 h-4 mx-2 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                                        <line x1="18" y1="6" x2="6" y2="18"></line>
-                                                        <line x1="6" y1="6" x2="18" y2="18"></line>
-                                                    </svg>
-                                                </button>
-                                                <button tabIndex="-1" className="cursor-pointer outline-none focus:outline-none border-l border-gray-200 transition-all text-gray-300 hover:text-blue-600">
-                                                    <svg className="w-4 h-4 mx-2 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
-                                                </button>
                                             </div>
                                         </div>
 
@@ -131,15 +130,6 @@ const CheckoutPage = () => {
                                                 <input
                                                     {...register("state", { required: true })}
                                                     name="state" id="state" placeholder="State" className="px-4 appearance-none outline-none text-gray-800 w-full bg-transparent" />
-                                                <button className="cursor-pointer outline-none focus:outline-none transition-all text-gray-300 hover:text-red-600">
-                                                    <svg className="w-4 h-4 mx-2 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                                        <line x1="18" y1="6" x2="6" y2="18"></line>
-                                                        <line x1="6" y1="6" x2="18" y2="18"></line>
-                                                    </svg>
-                                                </button>
-                                                <button tabIndex="-1" className="cursor-pointer outline-none focus:outline-none border-l border-gray-200 transition-all text-gray-300 hover:text-blue-600">
-                                                    <svg className="w-4 h-4 mx-2 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
-                                                </button>
                                             </div>
                                         </div>
 

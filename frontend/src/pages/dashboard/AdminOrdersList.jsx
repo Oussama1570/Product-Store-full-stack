@@ -50,6 +50,7 @@ const AdminOrdersList = () => {
       setLocalOrders((prevOrders) => prevOrders.filter((order) => order._id !== orderId));
     } catch (err) {
       console.error("Error deleting order:", err);
+      alert("Failed to delete the order.");
     }
   };
 
@@ -84,7 +85,7 @@ const AdminOrdersList = () => {
                 <td>{order.name || "N/A"}</td>
                 <td>{order.email || "N/A"}</td>
                 <td>{order.phone || "N/A"}</td>
-                <td>{order.productIds.join(", ") || "N/A"}</td>
+                <td>{order.productIds?.join(", ") || "N/A"}</td>
                 <td>{order.address?.street || "N/A"}</td>
                 <td>{order.address?.city || "N/A"}</td>
                 <td>{order.address?.state || "N/A"}</td>
@@ -94,7 +95,10 @@ const AdminOrdersList = () => {
                 <td>
                   <select
                     className="status-selector"
-                    
+                    value={order.paid}
+                    onChange={(e) =>
+                      handleStatusChange(order._id, "paid", e.target.value)
+                    }
                   >
                     <option value="Yes">Yes</option>
                     <option value="No">No</option>
@@ -103,7 +107,10 @@ const AdminOrdersList = () => {
                 <td>
                   <select
                     className="status-selector"
-                   
+                    value={order.delivered}
+                    onChange={(e) =>
+                      handleStatusChange(order._id, "delivered", e.target.value)
+                    }
                   >
                     <option value="Yes">Yes</option>
                     <option value="No">No</option>
@@ -115,7 +122,6 @@ const AdminOrdersList = () => {
                     Delete
                   </button>
                 </td>
-                
               </tr>
             ))}
           </tbody>
